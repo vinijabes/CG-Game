@@ -1,0 +1,26 @@
+{
+  "name": "CG-Game",
+  "version": "1.0.0",
+  "description": "\"# CG-Game\"",
+  "main": "main.js",
+  "scripts": {
+    "babel": "babel-node main.js",
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinijabes/CG-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinijabes/CG-Game/issues"
+  },
+  "homepage": "https://github.com/vinijabes/CG-Game#readme",
+  "dependencies": {
+    "Ava": "git+https://github.com/vinijabes/Trabalho-Computa-o-Grafica.git",
+    "electron": "^6.1.5"
+  }
+}
