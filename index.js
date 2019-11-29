@@ -22,7 +22,7 @@ let window = new Ava.Renderer.Window(new Ava.Math.Vec2(-context.Width / 2, -cont
 Ava.Canvas.CanvasApi.SetLocation(context, 2, window);
 
 let multipleLightPointsShader = new Ava.Renderer.Shader();
-multipleLightPointsShader.UploadData("lightPos", new Ava.Math.Vec3(0, 0, 100));
+multipleLightPointsShader.UploadData("lightPos", new Ava.Math.Vec3(0, 0, 50));
 multipleLightPointsShader.Compile("let N = location.normal; let L = this.Vec3.Sub(location.lightPos, ava.position).Normalize(); let R = (N.Clone().Mult(2 * N.Dot(L))).Sub(L).Normalize(); let S = this.Vec3.Sub(location.observatorPos, ava.position).Normalize(); let cosTeta = ((N.Dot(L)) / (N.Norm() * L.Norm())); let cosAlpha = (R.Dot(S)) / (R.Norm() * S.Norm()); if(cosTeta < 0 || cosAlpha < 0) cosAlpha = 0; let d = this.Vec3.Sub(location.lightPos, ava.position).Norm() / (Math.sqrt(ava.width**2 + ava.height**2)/8); let k = 0.3; ava.color = new this.Vec4(this.Vec3.Mult(ava.color, 0.2 + 1.0 * (location.Kd * cosTeta + location.Ks * Math.pow(cosAlpha, location.n)) / (k + d)), 1.0);");
 
 let sphere = new Ball();
@@ -44,14 +44,14 @@ tabela.GetComponent(Ava.Engine.Components.MeshRenderer).m_Mesh.Vertex = [
     -150, 100, 0, 1, 1, 1, 1, 0, 1, 0,
     150, -100, 0, 1, 1, 1, 1, 0, 1, 0,
     150, 100, 0, 1, 1, 1, 1, 0, 1, 0,
-    -50, -50, 1, 0, 0, 0, 0, 0, 1, 0,
-    -50, 20, 1, 0, 0, 0, 0, 0, 1, 0,
-    50, -50, 1, 0, 0, 0, 0, 0, 1, 0,
-    50, 20, 1, 0, 0, 0, 0, 0, 1, 0,
-    -45, -45, 2, 1, 1, 1, 1, 0, 1, 0,
-    -45, 15, 2, 1, 1, 1, 1, 0, 1, 0,
-    45, -45, 2, 1, 1, 1, 1, 0, 1, 0,
-    45, 15, 2, 1, 1, 1, 1, 0, 1, 0,
+    -50, -50, 2, 0, 0, 0, 0, 0, 1, 0,
+    -50, 20, 2, 0, 0, 0, 0, 0, 1, 0,
+    50, -50, 2, 0, 0, 0, 0, 0, 1, 0,
+    50, 20, 2, 0, 0, 0, 0, 0, 1, 0,
+    -45, -45, 4, 1, 1, 1, 1, 0, 1, 0,
+    -45, 15, 4, 1, 1, 1, 1, 0, 1, 0,
+    45, -45, 4, 1, 1, 1, 1, 0, 1, 0,
+    45, 15, 4, 1, 1, 1, 1, 0, 1, 0,
 ];
 
 tabela.GetComponent(Ava.Engine.Components.MeshRenderer).m_Mesh.Index = [
@@ -82,6 +82,13 @@ let netVertical1 = new LineObject("NetVertical");
 let netVertical2 = new LineObject("NetVertical");
 let netVertical3 = new LineObject("NetVertical");
 let netVertical4 = new LineObject("NetVertical");
+
+tabela.m_Material.m_Shader = multipleLightPointsShader;
+tabela.m_Material.m_Kd = 0.6;
+tabela.m_Material.m_Ks = 0.4;
+tabela.m_Material.m_N = 50;
+
+netCircle1.m_Color = new Ava.Math.Vec4(0.2, 0.3, 0.2, 1);
 
 for (let radius = 45; radius > 40; radius--) {
     for (let h = 0; h < 5; h++) {
@@ -130,7 +137,6 @@ net.AddChild(netVertical2);
 net.AddChild(netVertical3);
 net.AddChild(netVertical4);
 netCircle1.Transform.Translate(new Ava.Math.Vec3(0, -30, 0));
-netCircle1.m_Color = new Ava.Math.Vec4(0, 0, 0, 1);
 
 aro.m_Color = new Ava.Math.Vec4(0, 0, 0, 1);
 aro.Transform.Rotate(0, 0, 90);
@@ -140,9 +146,9 @@ aro.AddChild(net);
 let cesta = new Ava.Engine.GameObject();
 cesta.AddChild(tabela);
 cesta.AddChild(aro);
-cesta.m_Center = new Ava.Math.Vec3(0, -500, 4.33);
+cesta.m_Center = new Ava.Math.Vec3(0, -50, 0);
 
-cesta.Transform.Scale(1, 1, 1, 2);
+cesta.Transform.Scale(0.5, 0.5, 1, 1);
 
 let last = 0;
 let sum = 0;
