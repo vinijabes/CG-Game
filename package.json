@@ -21,6 +21,6 @@
   "homepage": "https://github.com/vinijabes/CG-Game#readme",
   "dependencies": {
     "Ava": "git+https://github.com/vinijabes/Trabalho-Computa-o-Grafica.git",
-    "electron": "^6.1.5"
+    "electron": "^15.5.5"
   }
 }
